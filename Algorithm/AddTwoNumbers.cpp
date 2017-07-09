@@ -11,10 +11,12 @@ class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         ListNode* head = NULL;
+        // 使用指针的指针：为最后一个节点的next指针（初始为head指针）的地址
         ListNode** tmp = &head;
         int carry = 0;
         int sum = 0;
         while (l1 != NULL || l2 != NULL) {
+            // 使用一个函数避免各种NULL判断
             int x = getValAndMoveNext(l1);
             int y = getValAndMoveNext(l2);
             sum = carry + x + y;
