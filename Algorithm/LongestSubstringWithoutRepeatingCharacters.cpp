@@ -34,3 +34,27 @@ public:
         return max_f;
     }
 };
+
+// chen hao's solution
+        int lengthOfLongestSubstring(string s) {
+            const int MAX_CHARS = 256;
+            int m[MAX_CHARS];
+            memset(m, -1, sizeof(m));
+
+            int maxLen = 0;
+            // 记录上一次发生重复char的位置
+            // 思想跟上面是类似的，只不过长度过长的时候，这个方法用到数组型的map，更快速
+            int lastRepeatPos = -1;
+            for(int i=0; i<s.size(); i++){
+                // 更新lastRepactpos
+                if (m[s[i]]!=-1 && lastRepeatPos < m[s[i]]) {
+                    lastRepeatPos = m[s[i]];
+                }
+                if ( i - lastRepeatPos > maxLen ){
+                    maxLen = i - lastRepeatPos;
+                }
+                // 每个char都记录的是最新的这个char的index
+                m[s[i]] = i;
+             }
+            return maxLen;
+        }
